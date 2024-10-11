@@ -250,11 +250,24 @@ section{
     margin: 5px;
 }
 
-@media(min-width:425px){
-    nome_redes { display:hidden; }
-    /* logo2 { display: none } */
-}
-
-.footer{
+.footer  p {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
     color: white;
+    opacity: 0.2;
+    font-size: 15px;
+}
+.footer a {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: white;
+    opacity: 0.2;
+    font-size: 15px;
+}
+.footer a:hover{
+    text-decoration: none;
+    color: #FF5CA8; 
+    opacity: 1;
 }
