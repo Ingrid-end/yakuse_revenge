@@ -1,9 +1,9 @@
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     
-}
+} */
 
 body{
     background-color: black;
@@ -165,9 +165,11 @@ section{
 }
 
 .imagen_nos{
-    width: 150px;
-    height: 150px;
-    border-radius: 100px;
+    width: 50%;
+  max-width: 200px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
    
 }
 
@@ -250,6 +252,11 @@ section{
     margin: 5px;
 }
 
+@media(min-width:425px){
+    nome_redes { display:hidden; }
+    /* logo2 { display: none } */
+}
+
 .footer  p {
     font-family: "Pixelify Sans", sans-serif;
     font-optical-sizing: auto;
@@ -270,4 +277,38 @@ section{
     text-decoration: none;
     color: #FF5CA8; 
     opacity: 1;
+}
+
+.imagem_katana_personagem{
+    transform: rotate(230deg);
+    z-index: 0;
+    width: 50%;
+    /* margin-top: 150px; */
+    /* margin-bottom: -300px; */
+}
+
+.imagem_sakura_flor{
+    z-index: 0;
+    width: 20%;
+    margin-top: -80px;
+    margin-right: 900px;
+    opacity: 0.5;
+    /* position: fixed; */
+}
+
+.imagem_sakura_flor_direito{
+    z-index: 0;
+    width: 20%;
+    margin-top: -80px;
+    margin-left: 900px;
+    opacity: 0.5;
+}
+
+.petala{
+    background-color: #FF5CA8;  
+    opacity: 0.5;
+    width: 100px;
+	height: 100px;
+	border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    z-index: 0;
 }

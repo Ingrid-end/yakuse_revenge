@@ -16,57 +16,42 @@ elemets.forEach((elemet)=> meuObservador.observe(elemet))
 
 // ---------------------------------------------------------------
 
-// Obter a data atual
-const dataAtual = new Date();
+//aqui vai sempre ser a hora atual
+var startDate = new Date();
+//como exemplo vou definir a data de fim com base na data atual
+var endDate = new Date();
+endDate.setDate(endDate.getDate()+30);
 
-// Adicione 8 dias à data atual
-const dataFinal = new Date(dataAtual);
-dataFinal.setDate(dataFinal.getDate() + 30);
+//aqui é a diferenca entre as datas, basicamente é com isso que voce calcula o tempo restante
+var dateDiff;
+var days, hours, minutes, seconds;
+var $day = $('#dias');
+var $hour = $('#horas');
+var $minute = $('#minutos');
+var $second = $('#segundos');
+var $debug = $('#debug');
+var timer;
 
-// Converter a data final para uma string no formato desejado
-const dataHoraFinalString = `${dataFinal.getFullYear()}-${(dataFinal.getMonth() + 1).toString().padStart(2, '0')}-${dataFinal.getDate().toString().padStart(2, '0')} 23:59:59`;
-
-// Dividir a data em um array
-const partesDataHora = dataHoraFinalString.split(/[\s:-]+/);
-
-//  Criar um objeto Date 
-const dataHoraFinal = new Date(partesDataHora[0], partesDataHora[1] - 1, partesDataHora[2], partesDataHora[3], partesDataHora[4], partesDataHora[5] || 0);
-
-// Atualize o contador a cada segundo
-const intervalo = setInterval(() => {
-
-    // Obter a data atual em São Paulo, em formato 'en-US', isto é, MM/DD/YYYY HH:mm:ss
-    const horaAtualSP = new Date(new Date().toLocaleString('en-US', {
-        timeZone: 'America/Sao_Paulo'
-    }));
-
-    // Calcular a diferença entre a data final e a data atual
-    const diferenca = dataHoraFinal - horaAtualSP;
-
-    // Verificar se atingiu a data final
-    if(diferenca <= 0){
-
-        // clearInterval é usada para parar a execução de intervalos de tempo
-        clearInterval(intervalo);
-
-        // Enviar o horário para o HTML
-        document.getElementById('dias').innerHTML = 0;
-        document.getElementById('horas').innerHTML = 0;
-        document.getElementById('minutos').innerHTML = 0;
-        document.getElementById('segundos').innerHTML = 0;
-        return;
-    }
-
-    // Calcular dias, horas, minutos e segundos
-    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-    // Enviar o horário para o HTML atualizar o elemento com o tempo restante
-    document.getElementById('dias').innerHTML = `dias: ${dias}`;
-    document.getElementById('horas').innerHTML = `${horas}h`;
-    document.getElementById('minutos').innerHTML = `${minutos}m`;
-    document.getElementById('segundos').innerHTML = `${segundos}s`;
-
-}, 1000);  // Atualizar a cada 1 segundo
+function update(){
+	dateDiff = endDate - startDate;
+  dateDiff = dateDiff / 1000;
+  
+	seconds = Math.floor((dateDiff % 60));
+  
+  dateDiff = dateDiff / 60;
+  minutes = Math.floor((dateDiff % 60));
+	
+  dateDiff = dateDiff / 60;
+  hours = Math.floor((dateDiff%24));
+  
+	days = Math.floor(dateDiff/24);
+  
+  $day.text(days);
+  $hour.text(hours);
+  $minute.text(minutes);
+  $second.text(seconds);
+  
+  startDate.setSeconds(startDate.getSeconds()+1);
+}
+update();
+timer = setInterval(update, 1000);
